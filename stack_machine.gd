@@ -1,4 +1,5 @@
 extends Node
+class_name stack_machine
 
 # This is the stack machine, which handles the overall game states. 
 # It creates the lowest-level states when needed. Each stack_state script
