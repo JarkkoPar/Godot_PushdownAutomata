@@ -92,3 +92,23 @@ func pop_state_from_stack() -> void:
 
 **Note !** Currently the `stack_machine` class calls the `physics_process(delta)` for the stacked states and `tick_state(delta)` for the top-most state in its `_physics_process(delta)` method. If you want more control over when these are called, just change the name of the `stack_machine`'s `_physics_process(delta)` method and call it where you want to in your code.
 
+
+## How do I push and pop the states? 
+
+In your script, load them first: `@onready var my_custom_state_template = preload("res://my_custom_state.gd")`. 
+
+Then in your code you just instantiate the state when you need to push it to the stack. To add the first state, you need to use the `stack_machine` node:
+```gdscript
+$stack_machine.push_state_to_stack(my_custom_state.new())
+```
+
+And within each state, you can push them like this:
+```gdscript
+push_state_to_stack(my_custom_state.new())
+```
+
+## How do I use the blackboard?
+
+The blackboard is a property in the `stack_machine` node, so outside of the stackable states you need to use `stack_machine.blackboard["key"] = value` syntax. Within a stackable state you just need to call `blackboard["other_key"] = other_value`.
+
+
