@@ -34,20 +34,9 @@ When the player presses the ESC-key, the unit_selected state pushes the in_game_
 
 ## How do I create states?
 
-You extend the stackable_state.gd class with your custom content. The stackable_state has the following methods:
+You extend the stackable_state.gd class with your custom content. The stackable_state has the following methods that you can override:
 
 ```gdscript
-extends Node 
-class_name stackable_state
-
-# This is the base state from which the other states are derived from. 
-# Because Godot uses duck-typing, this base state isn't strictly needed, 
-# but I like to use a base class to define a common interface when
-# creating class-like hierarchies.
-
-var stack_machine = null
-var blackboard:Dictionary 
-
 
 # This is called when the stack has been initialized and added
 # to the stack.
@@ -78,16 +67,6 @@ func tick_state(delta) -> void:
 func physics_process(delta) -> void:
 	pass
 
-# The following are convinience methods so that it is easier to 
-# push and pop the states within the stackable states.
-
-func push_state_to_stack( new_state:Node ) -> void:
-	stack_machine.push_state_to_stack(new_state)
-
-
-func pop_state_from_stack() -> void:
-	stack_machine.pop_state_from_stack()
-
 ```
 
 **Note !** Currently the `stack_machine` class calls the `physics_process(delta)` for the stacked states and `tick_state(delta)` for the top-most state in its `_physics_process(delta)` method. If you want more control over when these are called, just change the name of the `stack_machine`'s `_physics_process(delta)` method and call it where you want to in your code.
@@ -106,6 +85,8 @@ And within each state, you can push them like this:
 ```gdscript
 push_state_to_stack(my_custom_state.new())
 ```
+
+To pop a state you just call the `pop_state_from_stack()` method similarly to how you call the push method. Often times a state will call `pop_state_from_stack()` to pop itself out of the stack when it is done.
 
 ## How do I use the blackboard?
 
