@@ -78,7 +78,7 @@ In your script, load them first: `@onready var my_custom_state_template = preloa
 
 Then in your code you just instantiate the state when you need to push it to the stack. To add the first state, you need to use the `stack_machine` node:
 ```gdscript
-$stack_machine.push_state_to_stack(my_custom_state.new())
+$stack_machine.push_state_to_stack(my_custom_state_template.new())
 ```
 
 And within each state, you can push them like this:

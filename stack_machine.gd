@@ -44,6 +44,12 @@ func pop_state_from_stack() -> void:
 		state_stack[-1].on_state_reactivated()
 
 
+# Pops the stack until it is empty.
+func clear_stack() -> void:
+	while len(state_stack) > 0:
+		pop_state_from_stack()
+
+
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if len(state_stack) == 0 :
