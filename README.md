@@ -90,5 +90,5 @@ func pop_state_from_stack() -> void:
 
 ```
 
-**Note !** Currently the `stack_machine` class calls the `physics_process(delta)` for the stackeds tates and `tick_state(delta)` for the top-most state in its `_physics_frame(delta)` method. If you want more control over when these are called, just change the name of the `stack_machine`'s `_physics_process(delta)` method and call it where you want to in your code.
+**Note !** Currently the `stack_machine` class calls the `physics_process(delta)` for the stacked states and `tick_state(delta)` for the top-most state in its `_physics_process(delta)` method. If you want more control over when these are called, just change the name of the `stack_machine`'s `_physics_process(delta)` method and call it where you want to in your code.
 
