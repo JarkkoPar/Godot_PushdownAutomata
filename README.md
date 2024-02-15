@@ -3,7 +3,7 @@ A GDScript implementation of a Stack Machine: a stack-based state machine.
 
 ## Installation
 
-Just copy these to your project, and they will be available as nodes and in GDScript.
+Just copy these files to your project, and they will be available as nodes and in GDScript.
 
 
 ## What is a stack machine?
