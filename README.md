@@ -69,7 +69,7 @@ func physics_process(delta) -> void:
 
 ```
 
-**Note !** Currently the `pushdown_automata` class calls the `physics_process(delta)` for the stacked states and `tick_state(delta)` for the top-most state in its `_physics_process(delta)` method. If you want more control over when these are called, just change the name of the `stack_machine`'s `_physics_process(delta)` method and call it where you want to in your code.
+**Note !** Currently the `pushdown_automata` class calls the `physics_process(delta)` for the stacked states and `tick_state(delta)` for the top-most state in its `_physics_process(delta)` method. If you want more control over when these are called, just change the name of the `pushdown_automata`'s `_physics_process(delta)` method and call it where you want to in your code.
 
 
 ## How do I push and pop the states? 
