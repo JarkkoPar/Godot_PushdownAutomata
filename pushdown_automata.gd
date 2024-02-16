@@ -1,7 +1,7 @@
 extends Node
-class_name stack_machine
+class_name pushdown_automata
 
-# This is the stack machine, which handles the overall game states. 
+# This is the pushdown_automata, which handles the overall game states. 
 # It creates the lowest-level states when needed. Each stack_state script
 # then can create what ever states they need to create.
 
@@ -21,7 +21,7 @@ func initialize() -> void:
 
 # Used to push a new state on to the stack.
 func push_state_to_stack( new_state:Node ) -> void:
-	new_state.stack_machine = self
+	new_state.pda = self
 	new_state.blackboard = blackboard
 	
 	

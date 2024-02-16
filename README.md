@@ -1,25 +1,25 @@
-# Godot_StackMachine
-A GDScript implementation of a Stack Machine: a stack-based state machine.
+# Godot_PushdownAutomata
+A GDScript implementation of a Pushdown Automata: a stack-based state machine (aka Stack Machine).
 
 ## Installation
 
 Just copy these files to your project, and they will be available as nodes and in GDScript.
 
 
-## What is a stack machine?
+## What is a pushdown automata / stack machine?
 
-A stack machine is a state machine that instead of connecting various states to one another, handles state changes by stacking them on top of one another. The top-most state in the stack is the active one. 
+A pushdown automata is a state machine that instead of connecting various states to one another, handles state changes by **stacking** them on top of one another. The top-most state in the stack is the active one. 
 
-This is **very** convinient for games where the states need to go back and forth between different state hierarchies rather than transitioning between them in a more random manner.
+This is very convinient for games where the states need to go back and forth between different state hierarchies rather than transitioning between them in a more random manner.
 
-The states can share variables and have local variables to allow for communication between the states. This implementation of the stack machine uses a *blackboard* for sharing variables.
+The states can share variables in addition to local variables to allow for communication between the states. This implementation of the pushdown automata uses a *blackboard* for sharing variables.
 
 
 ## How does it work?
 
-You add the `stack_machine` node in your scene. Then you create the states you need (see section below on how to do that) and push them on to the stack. 
+You add the `pushdown_automata` node in your scene. Then you create the states you need (see section below on how to do that) and push them on to the stack. 
 
-This implementation of the stack machine works dynamically, which means that the states are created when they are added to the stack, and deleted when they are popped off form the stack.
+This implementation of the pushdown_automata works dynamically, which means that the states are created when they are added to the stack, and deleted when they are popped off form the stack.
 
 Let's assume you are creating a turn based game like XCOM: Enemy Unknown. When the player's turn starts, you push the default state on the stack. The default state handles mouse input and camera controls, and clicking on the units on the map.
 
@@ -69,16 +69,16 @@ func physics_process(delta) -> void:
 
 ```
 
-**Note !** Currently the `stack_machine` class calls the `physics_process(delta)` for the stacked states and `tick_state(delta)` for the top-most state in its `_physics_process(delta)` method. If you want more control over when these are called, just change the name of the `stack_machine`'s `_physics_process(delta)` method and call it where you want to in your code.
+**Note !** Currently the `pushdown_automata` class calls the `physics_process(delta)` for the stacked states and `tick_state(delta)` for the top-most state in its `_physics_process(delta)` method. If you want more control over when these are called, just change the name of the `stack_machine`'s `_physics_process(delta)` method and call it where you want to in your code.
 
 
 ## How do I push and pop the states? 
 
 In your script, load them first: `@onready var my_custom_state_template = preload("res://my_custom_state.gd")`. 
 
-Then in your code you just instantiate the state when you need to push it to the stack. To add the first state, you need to use the `stack_machine` node:
+Then in your code you just instantiate the state when you need to push it to the stack. To add the first state, you need to use the `pushdown_automata` node:
 ```gdscript
-$stack_machine.push_state_to_stack(my_custom_state_template.new())
+$pushdown_automata.push_state_to_stack(my_custom_state_template.new())
 ```
 
 And within each state, you can push them like this:
@@ -90,6 +90,6 @@ To pop a state you just call the `pop_state_from_stack()` method similarly to ho
 
 ## How do I use the blackboard?
 
-The blackboard is a property in the `stack_machine` node, so outside of the stackable states you need to use `stack_machine.blackboard["key"] = value` syntax. Within a stackable state you just need to call `blackboard["other_key"] = other_value`.
+The blackboard is a property in the `pushdown_automata` node, so outside of the stackable states you need to use `pushdown_automata.blackboard["key"] = value` syntax. Within a stackable state you just need to call `blackboard["other_key"] = other_value`.
 
 

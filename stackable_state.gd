@@ -6,7 +6,7 @@ class_name stackable_state
 # but I like to use a base class to define a common interface when
 # creating class-like hierarchies.
 
-var stack_machine = null
+var pda = null
 var blackboard:Dictionary 
 
 
@@ -28,7 +28,8 @@ func on_state_reactivated() -> void:
 	pass
 
 
-# This is called only for the top-most state in the stack.
+# This is called only for the top-most state in the stack
+# each physics frame.
 func tick_state(delta) -> void:
 	pass
 
@@ -42,9 +43,9 @@ func physics_process(delta) -> void:
 # push and pop the states within the stackable states.
 
 func push_state_to_stack( new_state:Node ) -> void:
-	stack_machine.push_state_to_stack(new_state)
+	pda.push_state_to_stack(new_state)
 
 
 func pop_state_from_stack() -> void:
-	stack_machine.pop_state_from_stack()
+	pda.pop_state_from_stack()
 
