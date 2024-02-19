@@ -22,6 +22,11 @@ func on_state_popped() -> void:
 	pass
 
 
+# This is called when a state gets pushed on top of this state.
+func on_state_deactivated() -> void:
+	pass
+
+
 # This is called when the state on top of this state has just
 # been popped.
 func on_state_reactivated() -> void:

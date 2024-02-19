@@ -24,6 +24,8 @@ func push_state_to_stack( new_state:Node ) -> void:
 	new_state.pda = self
 	new_state.blackboard = blackboard
 	
+	if len(state_stack) > 0:
+		state_stack[-1].on_state_deactivated()
 	
 	state_stack.push_back(new_state)
 	add_child(new_state)
